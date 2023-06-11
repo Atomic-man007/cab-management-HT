@@ -1,3 +1,4 @@
+import 'package:cab_management/screens/auth/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -111,8 +112,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
               height: 20.h,
             ),
             TextButton(
-                onPressed: () {},
-                child: const Text("Alreddy have an account? Login here"))
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginScreen()));
+                },
+                child: const Text("Already have an account? Login here"))
           ],
         ),
       ),
