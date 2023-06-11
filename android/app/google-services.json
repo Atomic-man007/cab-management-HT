@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "936276710414",
+    "firebase_url": "https://cab-management-a9111-default-rtdb.firebaseio.com",
+    "project_id": "cab-management-a9111",
+    "storage_bucket": "cab-management-a9111.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:936276710414:android:10a8be66e1ef8c6fe6d85f",
+        "android_client_info": {
+          "package_name": "com.example.cab_management"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "936276710414-2timvjae86snkeduojt3b6oei0sq9g2l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsAI9zdtdxw3MEgbHeBaqSq9-6wYQaXIw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "936276710414-2timvjae86snkeduojt3b6oei0sq9g2l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "936276710414-rrj4gv5grm8mfqijserf08usbvcu3cn8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.driveManagement"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
