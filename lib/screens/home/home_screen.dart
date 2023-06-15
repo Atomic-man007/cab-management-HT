@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: EdgeInsets.only(right: 10.w),
               child: CircleAvatar(
-                radius: 30.r,
+                radius: 18.r,
                 backgroundImage: const NetworkImage(
                     "https://s3.coinmarketcap.com/static-gravity/image/dffd4ef08f3d4f4b9c40c40b9f1e7771.jpeg"),
               ),
@@ -57,7 +57,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => DriverInfo()));
                   }),
-              drawerItems(title: 'Cab Info', onTap: () {}),
+              drawerItems(title: 'Cab Info', onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => DriverInfo()));
+              }),
 
               // Add more drawer items here
             ],

@@ -1,24 +1,33 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../services/driver_info_services.dart';
 
-class DriverInfoCardWidget extends StatelessWidget {
+class DriverInfoCardWidget extends StatefulWidget {
   const DriverInfoCardWidget({
-    super.key,
+    Key? key,
     required this.driverDetails,
     required this.index,
-  });
+  }) : super(key: key);
 
   final List<QueryDocumentSnapshot> driverDetails;
   final int index;
+
+  @override
+  State<DriverInfoCardWidget> createState() => _DriverInfoCardWidgetState();
+}
+
+class _DriverInfoCardWidgetState extends State<DriverInfoCardWidget> {
+  DriverInfoService driverInfoService = DriverInfoService();
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 10.w),
       decoration: BoxDecoration(
-          color: Colors.grey.shade300,
-          borderRadius: BorderRadius.circular(10.r)),
+        color: Colors.grey.shade300,
+        borderRadius: BorderRadius.circular(10.r),
+      ),
       child: Column(
         children: [
           Row(
@@ -27,37 +36,36 @@ class DriverInfoCardWidget extends StatelessWidget {
               CircleAvatar(
                 radius: 30.r,
                 backgroundImage: const NetworkImage(
-                    "https://s3.coinmarketcap.com/static-gravity/image/dffd4ef08f3d4f4b9c40c40b9f1e7771.jpeg"),
+                  "https://s3.coinmarketcap.com/static-gravity/image/dffd4ef08f3d4f4b9c40c40b9f1e7771.jpeg",
+                ),
               ),
-              SizedBox(
-                width: 20.w,
-              ),
+              SizedBox(width: 20.w),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    driverDetails[index].get("driverIdNumber"),
+                    widget.driverDetails[widget.index].get("driverIdNumber"),
                     style: TextStyle(
                       color: Colors.grey.shade500,
                       fontSize: 16.sp,
                     ),
                   ),
                   Text(
-                    driverDetails[index].get("driverName"),
+                    widget.driverDetails[widget.index].get("driverName"),
                     style: TextStyle(
                       color: Colors.grey.shade500,
                       fontSize: 16.sp,
                     ),
                   ),
                   Text(
-                    driverDetails[index].get("driverEmail"),
+                    widget.driverDetails[widget.index].get("driverEmail"),
                     style: TextStyle(
                       color: Colors.grey.shade500,
                       fontSize: 16.sp,
                     ),
                   ),
                   Text(
-                    driverDetails[index].get("driverIdNumber"),
+                    widget.driverDetails[widget.index].get("driverIdNumber"),
                     style: TextStyle(
                       color: Colors.grey.shade500,
                       fontSize: 16.sp,
@@ -73,12 +81,41 @@ class DriverInfoCardWidget extends StatelessWidget {
                 ],
               ),
               const Spacer(),
-              Icon(
-                Icons.more_vert,
-                size: 30.sp,
-              )
+              PopupMenuButton<String>(
+                onSelected: (String value) {
+                  if (value == 'edit') {
+                    // Perform edit action
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => EditDriverPage(),
+                    //   ),
+                    // );
+                  } else if (value == 'delete') {
+                    // Perform delete action
+                    driverInfoService.deleteDriver(widget.driverDetails[widget.index].id);
+                  }
+                },
+                itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                  const PopupMenuItem<String>(
+                    value: 'edit',
+                    child: ListTile(
+                      leading: Icon(Icons.edit),
+                      title: Text('Edit'),
+
+                    ),
+                  ),
+                  const PopupMenuItem<String>(
+                    value: 'delete',
+                    child: ListTile(
+                      leading: Icon(Icons.delete),
+                      title: Text('Delete'),
+                    ),
+                  ),
+                ],
+              ),
             ],
-          )
+          ),
         ],
       ),
     );
