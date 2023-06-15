@@ -8,6 +8,7 @@ class DriverInfoService {
     required String driverIdNumber,
     required String driverEmail,
     required String driverPhoneNumber,
+    required void Function() navigateToDriverInfo,
   }) async {
     try {
       var docRef = await firestore.collection("Add_driver_Details_table").add({
@@ -25,6 +26,9 @@ class DriverInfoService {
       });
 
       Fluttertoast.showToast(msg: "Details added successfully");
+      // Call the callback function to navigate to DriverInfo page
+      navigateToDriverInfo();
+
     } catch (e) {
       print("error while adding driver details $e");
       Fluttertoast.showToast(msg: "Error while adding details");

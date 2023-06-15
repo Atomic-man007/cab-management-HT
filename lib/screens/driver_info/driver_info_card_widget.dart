@@ -19,6 +19,35 @@ class DriverInfoCardWidget extends StatefulWidget {
 
 class _DriverInfoCardWidgetState extends State<DriverInfoCardWidget> {
   DriverInfoService driverInfoService = DriverInfoService();
+
+  void showDeleteConfirmationDialog(BuildContext context, String documentId) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Delete Confirmation'),
+          content: Text('Are you sure you want to delete this driver?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                // Call the deleteDriver function
+                driverInfoService.deleteDriver(documentId);
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text('Delete'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -84,7 +113,7 @@ class _DriverInfoCardWidgetState extends State<DriverInfoCardWidget> {
               PopupMenuButton<String>(
                 onSelected: (String value) {
                   if (value == 'edit') {
-                    // Perform edit action
+                    // // Perform edit action
                     // Navigator.push(
                     //   context,
                     //   MaterialPageRoute(
@@ -93,7 +122,7 @@ class _DriverInfoCardWidgetState extends State<DriverInfoCardWidget> {
                     // );
                   } else if (value == 'delete') {
                     // Perform delete action
-                    driverInfoService.deleteDriver(widget.driverDetails[widget.index].id);
+                    showDeleteConfirmationDialog(context, widget.driverDetails[widget.index].id);
                   }
                 },
                 itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[

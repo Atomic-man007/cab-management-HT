@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../services/driver_info_services.dart';
 import '../../utils/custom_button.dart';
+import 'driver_info.dart';
 
 class AddDriverInfo extends StatefulWidget {
   const AddDriverInfo({Key? key}) : super(key: key);
@@ -40,13 +41,13 @@ class _AddDriverInfoState extends State<AddDriverInfo> {
         ),
         centerTitle: true,
         actions: [
-          TextButton(
-            onPressed: () {},
-            child: const Text(
-              "Home",
-              style: TextStyle(color: Colors.black),
-            ),
-          )
+          // TextButton(
+          //   onPressed: () {},
+          //   child: const Text(
+          //     "Home",
+          //     style: TextStyle(color: Colors.black),
+          //   ),
+          // )
         ],
       ),
       body: Column(
@@ -97,14 +98,20 @@ class _AddDriverInfoState extends State<AddDriverInfo> {
                     driverIdNumber: _driverIdNumberController.text,
                     driverEmail: _driverEmailController.text,
                     driverPhoneNumber: _driverPhoneNumberController.text,
+                    navigateToDriverInfo: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => DriverInfo()),
+                      );
+                    }
                   );
-
                   setState(() {
                     _isLoading = false;
                   });
                 }
               },
             ),
+
           )
         ],
       ),
